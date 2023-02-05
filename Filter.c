@@ -319,29 +319,44 @@ for (int h = 0; h < height; h++)
 //value = 0
 
 //and
+
+//Where would this program create problems with memory from easiest to hardest to fix?
+
+//Arrays - the array position referenced does not exist within in the array
+
+//Where would this be a problem? images[wm1][hm1]
+
+//Array indexing for loops and final_value
+
+
+//malloc - a fixed portion of memory taking up too much RAM i.e. not using malloc and free properly for the edges function
+
+
+//
+
+
+
+
 void edges(int height, int width, RGBTRIPLE image[height][width])
 {
-int GX_array[height * width][3];
-int GY_array[height * width][3];
-int tracking_index_for_each_half_array = 0;
+int GX_array[height * width][3]; //= malloc((height * width)*3);
+int GY_array[height * width][3]; //= malloc((height * width)*3);
+int tracking_index_for_each_half_array = 0; //malloc(1);
 
-int Final_values_for_image[height * width][3];
-int GX_sum_value_r = 0;
-int GX_sum_value_g = 0;
-int GX_sum_value_b = 0;
+//int Final_values_for_image[height * width][3];
+int GX_sum_value_r = 0;//malloc(1);
+int GX_sum_value_g = 0;//malloc(1);
+int GX_sum_value_b = 0;//malloc(1);
 
-int GY_sum_value_r = 0;
-int GY_sum_value_g = 0;
-int GY_sum_value_b = 0;
+int GY_sum_value_r = 0;//malloc(1);
+int GY_sum_value_g = 0;//malloc(1);
+int GY_sum_value_b = 0; //malloc(1);
 
 
-int multiplier = 0;
+int multiplier = 0; //malloc(1);
 //GX_array_loop + GX_array_loop
 for (int h = 0; h < height; h++)
 {
-
-
-
 
 
             for (int w = 0; w < width; w++)
@@ -389,14 +404,101 @@ for (int h = 0; h < height; h++)
                             multiplier *= 1;
                             }
 
+                            //Create if condition to cover for values that fall outside image bitmap
 
+
+                            if (wm1 < 0 || width < wm1)
+                            {
+                            GX_sum_value_r +=  0;
+                            GX_sum_value_g += 0;
+                            GX_sum_value_b += 0;
+
+                            }
+
+                            else if (hm1 < 0 || height < hm1)
+                            {
+                            GX_sum_value_r +=  0;
+                            GX_sum_value_g += 0;
+                            GX_sum_value_b += 0;
+
+                            }
+
+                            else
+                            {
+                            GX_sum_value_r +=  image[hm1][wm1].rgbtRed * multiplier;
+                            GX_sum_value_g += image[hm1][wm1].rgbtGreen * multiplier;
+                            GX_sum_value_b += image[hm1][wm1].rgbtBlue * multiplier;
+                            }
 
 
                             }
                     }
-//GY_loop
+
+            //GY_loop
+            GY_sum_value_r = 0;
+            GY_sum_value_g = 0;
+            GY_sum_value_b = 0;
+
+            for (int hm1 = h - 1; hm1 <= h + 1; hm1++)
+                    {
+
+                            for (int wm1 = w - 1; wm1 <= w + 1; wm1++)
+                            {
+
+//Gy values are computed:
+//if new value == w, then multiplier is 2 otherwise multiplier is 1
+//if new value is h, then multiplier is 0
+//if new value < h, multiplier is x-1
+//if new value is greater than 1, multiplier is x1
+
+                            if (wm1 == w)
+                            {
+                            multiplier = 2;
+                            }
+                            else
+                            {
+                            multiplier = 1;
+                            }
+
+                            if (hm1 == h)
+                            {
+                            multiplier = 0;
+                            }
+                            else if (hm1 < h)
+                            {
+                            multiplier *= -1;
+                            }
+                            else if (h < hm1)
+                            {
+                            multiplier *= 1;
+                            }
 
 
+
+                             if (wm1 < 0 || width < wm1)
+                            {
+                            GY_sum_value_r +=  0;
+                            GY_sum_value_g += 0;
+                            GY_sum_value_b += 0;
+
+                            }
+
+                            else if (hm1 < 0 || height < hm1)
+                            {
+                            GY_sum_value_r +=  0;
+                            GY_sum_value_g += 0;
+                            GY_sum_value_b += 0;
+
+                            }
+
+                            else
+                            {
+                            GY_sum_value_r +=  image[hm1][wm1].rgbtRed * multiplier;
+                            GY_sum_value_g += image[hm1][wm1].rgbtGreen * multiplier;
+                            GY_sum_value_b += image[hm1][wm1].rgbtBlue * multiplier;
+                            }
+                    }
+                    }
 
 
 
@@ -405,13 +507,13 @@ for (int h = 0; h < height; h++)
 
 //////
 //Divide both values by 9, then square the result
-GX_sum_value_r = round(power(GX_sum_value_r/9));
-GX_sum_value_g = round(power(GX_sum_value_g/9));
-GX_sum_value_b = round(power(GX_sum_value_b/9));
+GX_sum_value_r = round(pow((double)(GX_sum_value_r/9),2.00));
+GX_sum_value_g = round(pow((double)(GX_sum_value_g/9),2.00));
+GX_sum_value_b = round(pow((double)(GX_sum_value_b/9),2.00));
 
-GY_sum_value_r = round(power(GY_sum_value_r/9));
-GY_sum_value_g = round(power(GY_sum_value_g/9));
-GY_sum_value_b = round(power(GY_sum_value_b/9));
+GY_sum_value_r = round(pow((double)(GY_sum_value_r/9),2.00));
+GY_sum_value_g = round(pow((double)(GY_sum_value_g/9),2.00));
+GY_sum_value_b = round(pow((double)(GY_sum_value_b/9),2.00));
 
 
 
@@ -426,19 +528,87 @@ GY_array[tracking_index_for_each_half_array][1] = GY_sum_value_g;               
 GY_array[tracking_index_for_each_half_array][2] = GY_sum_value_b;                //2 - Blue
 
 tracking_index_for_each_half_array++;
+            }
 
+
+
+}
+
+/* Using these kernels, we can generate a Gx and Gy value for each of the red, green, and blue channels for a pixel.
+But each channel can only take on one value, not two: so we need some way to combine Gx and Gy into a single value.
+The Sobel filter algorithm combines Gx and Gy into a final value by calculating the square root of Gx^2 + Gy^2.
+And since channel values can only take on integer values from 0 to 255, be sure the resulting value is rounded to the nearest integer and capped at 255!
+*/
+
+//Maths:
+// tracking_index_for_each_half_array = 0;
+// for h < height; w < width:
+// image[h][w].rgbtRed = round(sqrt((GX_array[tracking_index_for_each_half_array][0] + GY_array[tracking_index_for_each_half_array][0])));
+//if (image[h][w].rgbtRed > 255)
+//{
+//image[h][w].rgbtRed = 255;
+//}
+//image[h][w].rgbtGreen = round(sqrt((GX_array[tracking_index_for_each_half_array][1] + GY_array[tracking_index_for_each_half_array][1])));
+//if (image[h][w].rgbtRed > 255)
+//{
+//image[h][w].rgbtRed = 255;
+//}
+//image[h][w].rgbtBlue = round(sqrt((GX_array[tracking_index_for_each_half_array][2] + GY_array[tracking_index_for_each_half_array][2])));
+//if (image[h][w].rgbtRed > 255)
+//{
+//image[h][w].rgbtRed = 255;
+//}
+//tracking_index_for_each_half_array++;
+
+
+
+tracking_index_for_each_half_array = 0;
+for (int h = 0; h < height; h++)
+{
+            for (int w = 0; w < width; w++)
+            {
+
+
+                image[h][w].rgbtRed = round(sqrt((GX_array[tracking_index_for_each_half_array][0] + GY_array[tracking_index_for_each_half_array][0])));
+
+                    if (image[h][w].rgbtRed > 255)
+                    {
+
+                    image[h][w].rgbtRed = 255;
+
+                    }
+
+                image[h][w].rgbtGreen = round(sqrt((GX_array[tracking_index_for_each_half_array][1] + GY_array[tracking_index_for_each_half_array][1])));
+
+                    if (image[h][w].rgbtGreen > 255)
+                    {
+
+                    image[h][w].rgbtGreen = 255;
+
+                    }
+
+                image[h][w].rgbtBlue = round(sqrt((GX_array[tracking_index_for_each_half_array][2] + GY_array[tracking_index_for_each_half_array][2])));
+
+                    if (image[h][w].rgbtBlue > 255)
+                    {
+
+                    image[h][w].rgbtBlue = 255;
+
+                    }
+
+                tracking_index_for_each_half_array++;
 
 
 
             }
 
 
-
-
-
-
-
-
 }
+
+
+
+
+
+
     return;
 }
