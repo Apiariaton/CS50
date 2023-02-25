@@ -1,74 +1,73 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include "check_arguments.h"
+#include "jpeg_file_manipulations.h"
+
+
+
+struct magic_number_JPEG {
+    int first_value[1];
+    int second_value[1];
+    int third_value[1];
+    int fourth_value[16];
+};
+
+//Number one: Initialise - J4 *FIRST_FOUR_JPEG_BYTES
+
+//Number two: Initialise - image_file *original_image_file by using malloc, but not assigning values
+
+//Number three: Initialise values for copy_of_head_of_linked_list, START_FILE_BOOKMARK, END_FILE_BOOKMARK, current_position_in_JPEG_file_sequence, file_size
+    //Initialise END_FILE_BOOKMARK by doing the following:
+        //*START_FILE_BOOKMARK = fopen(argv[1],"rb");
+        //*END_FILE_BOOKMARK = *START_FILE_BOOKMARK
+        //fseek(END_FILE_BOOKMARK,512,SEEK_CUR);
+
+//At this point we can then start the loop of functions testing to see whether write_JPEG_section_to_a_file returns 1
+//capture_file_four_bytes(...);
+//if (JPEG_beginning(...) == 0)
+//      {
+//          if (write_JPEG_section_to_a_file(...) == 1)
+            //return 0;
+//      }
+
+
+
+
 
 int main(int argc, char *argv[])
 {
 
-//Problem breakdown
-//FUNCTION 1 int check_argument();
-//1.0 First accept an argument only if the argument count is 1.
-//Otherwise throw an error message by returning 1 and printing error message.
-//A. How is the arg count calculated? Represented by argc. A second rule is that there should be no
-//more than one full stop.
+    if(check_whether_arguments_correct(&argc,argv) == 1) //Something is going wrong - diagnose with Valgrind or with ChatGPT/StackOverflow
+    {
+        return 1;
+    }
 
-//int check_file_is_readable();
-//2.0 Then open or attempt to open the image for reading. If the image cannot be read,
-//return 1 after printing an error message "File not readable. Please try again,
-//ensuring the file is interpretable as a series of JPEG images".
-//B. How do you read a file in C?
-//fopen() (add a FILE pointer to the file)
-//assign a variable the function fopen()
-//if the variable == NULL invalid function
-//Not going to include file size calculation - were I to do this though, could use fseek();
+//Number one: Initialise - J4 *FIRST_FOUR_JPEG_BYTES
 
-//3.0 Going up in jumps of 512 bytes, the first four hexadecimals of the sequence should be read.
-//If they match the number corresponding to the start of a JPEG, then the cumulative number stored
-//will be used to allocate memory for the given image.
-//while (!(check_byte_values_of_current_position(&current_position))
-//{current_position += 512 bytes (pointer arithmetic)}
+//Number two: Initialise - image_file *original_image_file by using malloc, but not assigning values
 
-//fgets(char *first_four_hexadecimal_byte_values, int size (of hexadecimals), FILE *ptr (current index)
+//Number three: Initialise values for copy_of_head_of_linked_list, START_FILE_BOOKMARK, END_FILE_BOOKMARK, current_position_in_JPEG_file_sequence, file_size
+    //Initialise END_FILE_BOOKMARK by doing the following:
+        //*START_FILE_BOOKMARK = fopen(argv[1],"rb");
+        //*END_FILE_BOOKMARK = *START_FILE_BOOKMARK
+        //fseek(END_FILE_BOOKMARK,512,SEEK_CUR);
 
-//while (fgets(additive_string, 512, pointer to file) != NULL)
-//{
-//if ([0:4] == Hexadecimal sequence)
-//REALLOCATE SIZE OF IMAGE IN QUESTION IN RELATION TO ADDITIVE STRING
-//COMBINE EXISTING STRING WITH ADDITIVE STRING
-//WRITE THIS STRING TO A FILE CALLED NO. X
-//INCREMENT FILE NUMBER SIZE
-//FREE(MEMORY OF CURRENT JPEG STORE)
-//MALLOC(512 bytes)
-//else
-////REALLOCATE SIZE OF IMAGE IN QUESTION IN RELATION TO ADDITIVE STRING
-//COMBINE EXISTING STRING WITH ADDITIVE STRING
-//}
-
-
-//3.5 An image placeholder should be created where an individual JPEG stored. The size of this
-//should be allocated by malloc(in proportion to the number of bytes taken up by the image).
-
-
-//4.0 This image should be written to another file, whose name corresponds to an image number tracker,
-//which increments with each image extracted.
-
-//5.0 This file should then be closed upon finish. The memory allocated to the image should be freed.
+//At this point we can then start the loop of functions testing to see whether write_JPEG_section_to_a_file returns 1
+//capture_file_four_bytes(...);
+//if (JPEG_beginning(...) == 0)
+//      {
+//          if (write_JPEG_section_to_a_file(...) == 1)
+            //return 0;
+//      }
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+return 0;
 }
+
+
