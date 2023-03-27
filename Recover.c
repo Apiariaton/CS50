@@ -1,9 +1,9 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include "check_arguments.h"
-#include "jpeg_file_structs_and_operations.h"
+#include <stdio.h>
+#include <stdint.h>
 
 
 int main(int argc, char *argv[])
@@ -14,166 +14,202 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-report_file_size_in_terms_of_byte_blocks(argv);
+FILE *card_raw = fopen(argv[1],"r");
+fseek(card_raw,0,SEEK_END);
+long int file_size = ftell(card_raw);
+fclose(card_raw);
 
-image_file *original_image_file = malloc(sizeof(image_file));
-image_file *copy_of_head_of_linked_file_list = original_image_file;
+//uint8_t magic_number_set[4] = {0xd8,0xd8,0xff,0xe0}; //Final number to have bitwise comparison performed
+
+uint8_t *buffer_to_store_file_stream = (uint8_t *) (malloc(512));
+
+for (int i = 0; i < 513; i++)
+{
+*(buffer_to_store_file_stream + i) = 0;
+}
+
+FILE *card_dot_raw = fopen(argv[1],"r");
+int JPEG_magic_number_sequence_start_found = 0;
+long int relative_position_of_start_of_JPEG_sequence_within_file = 0;
+long int pos_within_512_bytes = 0;
+
+while (JPEG_magic_number_sequence_start_found == 0)
+{
+fread(buffer_to_store_file_stream,1,512,card_dot_raw);
 
 
-uint8_t copy_of_final_four_value_set[16];
-uint8_t hex_value = 0xe0;
+for (int i = 0; i < 512; i++)
+{
+printf("%u",*(buffer_to_store_file_stream + i));
+}
 
-        for (int i = 0; i < 16; i++)
+for (int i = 0; i < 512; i++)
+{
+if (*(buffer_to_store_file_stream + i) == 0xff )
+{
+    if (*(buffer_to_store_file_stream + i + 1) == 0xd8 )
+    {
+        if (*(buffer_to_store_file_stream + i + 2) == 0xff)
         {
-
-            copy_of_final_four_value_set[i] = hex_value;
-            hex_value++;
+            //
+            if (((*(buffer_to_store_file_stream + i + 3)) & 0xf0) == 0xe0)
+            {
+            printf("First four numbers of magic number sequence found");
+            relative_position_of_start_of_JPEG_sequence_within_file += i;
+            pos_within_512_bytes = i;
+            printf("This is where the JPEG file sequence starts: %lu", relative_position_of_start_of_JPEG_sequence_within_file);
+            JPEG_magic_number_sequence_start_found = 1;
+            }
 
         }
-
-J4 *FIRST_FOUR_BYTES = malloc(sizeof(J4));
-
-    FIRST_FOUR_BYTES->three_values[0] = 0xff;
-    FIRST_FOUR_BYTES->three_values[1] = 0xd8;
-    FIRST_FOUR_BYTES->three_values[2] = 0xd8;
-
-    //memcpy(FIRST_FOUR_BYTES->fourth_set_of_values,copy_of_final_four_value_set,2); //Problem here with the allocation of values to fourth_set_of_values - would like to find more stream-lined solution
-
-    for (int i = 0; i < 16; i++)
-    {
-    FIRST_FOUR_BYTES->fourth_set_of_values[i] = copy_of_final_four_value_set[i];
     }
-
-uint8_t four_bytes_of_this_512_byte_block[4];
-
-
-IJS *unit_characteristic_storage = malloc(sizeof(IJS));
-
-/*
-typedef struct individual_JPEG_segment
-{
-int current_position_in_list_of_fifty_files;
-char *current_JPEG_file_name;
-
-long int unit_start_address_as_offset;
-
-long int unit_end_address_as_offset;
-} IJS;
-*/
-
-printf("%s\n",argv[1]);
-FILE * ONE_FILE_BOUND_MARKER = fopen(argv[1],"rb");
-
-unit_characteristic_storage->unit_start_address_as_offset = ftell(ONE_FILE_BOUND_MARKER);
-
-/*
-fseek(ONE_FILE_BOUND_MARKER, 0, SEEK_END);
-fseek(ONE_FILE_BOUND_MARKER,0,SEEK_SET);
-fseek(ONE_FILE_BOUND_MARKER,1,SEEK_CUR); //Relativised part of file - End of file is 506368 relative bytes
-fseek(ONE_FILE_BOUND_MARKER,1L,SEEK_CUR); //Why does fseek get stuck at 4096 bytes?
-fseek(ONE_FILE_BOUND_MARKER,1,SEEK_CUR);
-fseek(ONE_FILE_BOUND_MARKER,1,SEEK_CUR);
-fseek(ONE_FILE_BOUND_MARKER,1,SEEK_CUR);
-fseek(ONE_FILE_BOUND_MARKER,1,SEEK_CUR);
-*/
-
-//Different approach as it appears that I am being constrained by the current file being limited by the I/O buffer mode which is in use and I need to use fread in order to write to
-//buffer. First of all, I will be taking the following data type a uint8_t. fread(uint8_t buffer, 1, 512, ONE_FILE_BOUND_MARKER) if != realloc(buffer,sizeof(buffer) + 512);
-//if == fwrite(buffer,sizeof(buffer),1,copy...->file_start_location)//fclose(copy...file_start_location)
-
-
-uint8_t *JPEG_image_storage_unit = malloc(sizeof(uint8_t) * 512);
-int new_writing_position = 0;
-uint8_t return_position = 0;
-
-fread(JPEG_image_storage_unit,1,512,ONE_FILE_BOUND_MARKER);
-capture_file_four_bytes(FILE *ONE_FILE_BOUND_MARKER,file_four_bytes);
-
-if (JPEG_beginning(FOUR_DISTINCT_JPEG_VALUES,file_four_bytes) == 0);
-{
-sprintf(copy_of_head_of_linked_list->file_name,"IMG_NO_%i.jpeg",current_position_in_JPEG_file_sequence);
-
-copy_of_head_of_linked_list->file_start_location = fopen(copy_of_head_of_linked_list->file_name,"wb");
-
-fwrite(JPEG_image_storage_unit,sizeof(JPEG_image_storage_unit),1,copy_of_head_of_linked_file_list->file_start_location);
-
-fclose(copy_of_head_of_linked_file_list->file_start_location);
-
-copy_of_head_of_linked_file_list->next = malloc(sizeof(image_file));
-
-copy_of_head_of_linked_file_list = copy_of_head_of_linked_file_list->next;
-
-JPEG_image_storage_unit = malloc(sizeof(uint8_t) * 512);
-
-current_position_in_JPEG_file_sequence += 1;
-
-//return_position = ftell(ONE_FILE_BOUND_MARKER);
-
-if (fseek(ONE_FILE_BOUND_MARKER,508,SEEK_CUR) == NULL)
-{
-//Capture last file
-
-
-
-
-return 0;
 }
 
-fseek(ONE_FILE_BOUND_MARKER,-508,SEEK_CUR);
+}
+relative_position_of_start_of_JPEG_sequence_within_file += 512;
+}
+fseek(card_dot_raw,-(512 - pos_within_512_bytes),SEEK_CUR); //Now next step...
 
-fwrite(file_four_bytes,4,1,JPEG_image_storage_unit);
-fwrite(ONE_FILE_BOUND_MARKER,508,1,(*JPEG_image_storage_unit + 4));
+int first_file_read = 0;
+int current_file_number = 0;
+char *current_file_name = (char *) malloc(9);
 
+
+
+int bytes_read = 0;
+int how_many = 0;
+uint8_t *buffer_new = (uint8_t *) malloc(512);
+for (int i = 0; i < 512; i++)
+{
+*(buffer_new + i) = 0;
+printf("%u", *(buffer_new + i));
 }
 
+sprintf(current_file_name,"%03d.jpeg",current_file_number++);
+FILE * current_JPEG_file = fopen(current_file_name,"w");
+
+long long position_cdr = 0;
+
+int i = 0;
+
+//while (i == 0)
+//{
+while (i == 0)
+{
+while (bytes_read < 512)
+{
+how_many = fread(buffer_new++,1,1,card_dot_raw); //Possible segmentation error unless buffer reset
+if (how_many == 0)
+{
+//Break the loop but first we need to identify whether the first four numbers of the buffer match those of the JPEG magic number sequence: if they don't, write
+//to existing current_JPEG_file - if they do, write a new current_JPEG_file
+i = 1;
+}
+position_cdr = ftell(card_dot_raw);
+bytes_read += how_many;
+printf("%i",bytes_read);
+//printf("Position CDR:%lld",position_cdr);
+}
+
+if (first_file_read == 0)
+{
+buffer_new -= 512;
+int number_written = fwrite(buffer_new,1,512,current_JPEG_file);
+first_file_read = 1;
+}
+///
 else
 {
-//return_position = ftell(ONE_FILE_BOUND_MARKER);
-if (fseek(ONE_FILE_BOUND_MARKER,508,SEEK_CUR) == NULL)
+buffer_new -= 512;
+
+if (*(buffer_new) ==  0xff)// && printf("This is buffer_new's first value %u",*(buffer_new))) //Incomplete sequence - possibly need to null terminate the array of uint8_t
 {
-//Capture part of last file which is current file
-fseek(ONE_FILE_BOUND_MARKER,-508,SEEK_CUR);
+    if (*(buffer_new + 1) == 0xd8 )
+    {
 
-new_writing_position = sizeof(JPEG_image_storage_unit);
+        if (*(buffer_new + 2) == 0xff)
+        {
 
-JPEG_image_storage_unit = realloc(JPEG_image_storage_unit,512 + new_writing_position);
+            //
+            if (((*(buffer_to_store_file_stream + 3)) & 0xf0) == 0xe0)
+            {
+            fclose(current_JPEG_file);
+            printf("First four numbers of magic number sequence found");
+            sprintf(current_file_name,"%03d.jpeg",current_file_number++);// \0 may be unnecessary
+            if (current_file_number == 50)
+            {
+            return 0;
+            }
+            puts(current_file_name);
+            current_JPEG_file = fopen(current_file_name,"w");
+            for (int q = 0; q < 512; q++)
+            {printf("%u",*(buffer_new + q));}
+            fwrite(buffer_new,1,512,current_JPEG_file);
+            }
+            else
+            {
 
+            }
 
-fwrite(file_four_bytes,4,1,(*JPEG_image_storage_unit + new_writing_position))
+        }
+        else
+        {
 
-fwrite(ONE_FILE_BOUND_MARKER,508,1,(*JPEG_image_storage_unit + new_writing_position + 4));
+        }
+    }
+    else
+    {
 
-copy_of_head_of_linked_list->file_start_location = fopen(copy_of_head_of_linked_list->file_name,"wb");
+    }
+}
+else
+{
+printf("This is the size of buffer_new %lu",sizeof(buffer_new));
+for (int q = 0; q < 512; q++)
+{printf("No. %i: %u",q,*(buffer_new + q));} //If all data can be seen error is with current_JPEG_file
+fwrite(buffer_new,1,512,current_JPEG_file); //What is my diagnosis of the problem?
+}
+//Problem speculation: fwrite is attempting to read to memory that is not accessible to current_JPEG_file
+//because there is another variable "in the way"
+//Easiest to solve - because current_JPEG_file is unnaturally big and should be smaller, meaning there is an issue with fclose
+//because memory is being read from buffer_new in such a way that the data ends before the read is complete
+}
+//What tests can we create? //Question are the JPEG images truly contiguous
+// Charset of this code is ASCII as 104 = "h", therefore we should set charset to ASCII, so that any conversion happens properly
 
-fwrite(JPEG_image_storage_unit,sizeof(JPEG_image_storage_unit),1,copy_of_head_of_linked_file_list->file_start_location);
-
-fclose(copy_of_head_of_linked_file_list->file_start_location);
-
-return 0;
+bytes_read = 0;
+how_many = 0;
+}
 }
 
-new_writing_position = sizeof(JPEG_image_storage_unit);
+//What is happening here? The values of current_JPEG_file are getting stuck on the same value.
+//What reasons might be responsible?
 
-JPEG_image_storage_unit = realloc(JPEG_image_storage_unit,512 + new_writing_position);
-
-fwrite(file_four_bytes,4,1,(*JPEG_image_storage_unit + new_writing_position));
-
-fwrite(ONE_FILE_BOUND_MARKER,508,1,(*JPEG_image_storage_unit + new_writing_position + 4)); //Return to this later
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-return 0;
-}
+/* Pseudocode script
+1. First check that arguments are correct.
+2. Second open with "r" and determine file size, using fseek, followed by ftell. Store as a long int.
+3. Close the file in question.
+--Test phase 0--
+4. Next create a value with uint8_t: this is going to be the value referred to by malloc. Malloc needs to be typecast to uint8_t to coincide with the value type.
+5. Write a file start loop. Open the argument in read mode. While the start has not been found, read 512 bytes from card_dot_raw to the buffer.
+--Test phase 0.5
+6. Cycle through this buffer, storing the relative position to as a r_file_position_marker.
+7. When the bytes of the buffer coincide with the magic number JPEG sequence, store ftell as the buffer end variable.
+8. Separately, write a variable called difference between buffer end and start.
+9. Store the value of ftell buffer end minus r_file_position_marker to starting_position_of_JPEG_photobook.
+10. Move the file pointer to this position using -starting_position_of_JPEG_photobook and fseek (SEEK_CUR).
+11. Check that fseek's return value is 0.
+--Test phase 1 --
+12. Using sprintf, write the current name of the file to the file_pointer_name and augment the file number.
+13. Read the content of the file, character by character while incrementing x, into a file_pointer for JPEG_storage.
+    -If fread returns 0,
+    -Close the current file
+14. Use ferror to test the file from which data is being read. If return value is not 0, an error has been produced.
+15. When x is 512, reset to 0. Write the first four numbers to a magic number buffer.
+--Test phase 2 --
+16. Check that the numbers in the buffer do not match the magic number sequence.
+17. If they do, move the file pointer back using fseek -4 SEEK_CUR.
+    -Then close the file to which the JPEG was being written.
+18. If not write previously, following steps 12 to 15.
+--Test phase 3--
+*/
