@@ -509,8 +509,44 @@ unsigned int size(void)
     }
 */
 bool free_memory(node * ref_to_tabular_entry)
+ {
+    if (ref_to_tabular_entry->next == NULL)
     {
+    free(ref_to_tabular_entry);
+    ref_to_tabular_entry = NULL;
+    }
+    else
+    {
+    free_memory(ref_to_tabular_entry->next);
+    }
+    free(ref_to_tabular_entry);
+    ref_to_tabular_entry = NULL;
+    return true;
+ }
 
+
+
+
+
+/*
+   // TODO: Handle base case
+    if (p->parents[0] == NULL && p->parents[1] == NULL)
+    {
+    free(p);
+    p = NULL;
+    }
+    // TODO: Free parents recursively
+    else
+    {
+    free_family(p->parents[0]);
+    free_family(p->parents[1]);
+    }
+    // TODO: Free child
+    free(p);
+    p = NULL;
+*/
+
+/*
     node *starting_point = ref_to_tabular_entry;
     while (starting_point != NULL)
     {
@@ -533,7 +569,7 @@ bool free_memory(node * ref_to_tabular_entry)
     free(ref_to_tabular_entry);
     ref_to_tabular_entry = NULL;
     return true;
-
+*/
 /*
     if (starting_point->next == NULL)
     {
@@ -550,7 +586,7 @@ bool free_memory(node * ref_to_tabular_entry)
     }
     return false;
 */
-}
+
 
 bool unload(void)
 {
@@ -570,8 +606,4 @@ bool unload(void)
 
     return true;
     }
-
-
-
-
 
