@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<meta lang ="en">
+<meta title="Radioshack">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radioshack</title>
+<link rel="icon" href="images/R.png" type="image/png">
+
+
+<link href=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css " rel="stylesheet">
+<link href="styles.css" rel="stylesheet">
+
+
+
+
+
+</head>
+<body>
+<!--The container for our webpage: this will be a container-fluid-->
+<div class="container-fluid">
+<!--The Navbar-->
+          <nav class="navbar bg-light nav-dark navbar-expand-lg">
+            <div class="container-fluid">
+<!--The Navbar Image-->
+              <img src="images/RadioShack.png" alt="RadioShack Logo">
+<!--Navbar Collapse Toggler-->
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="False">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+<!--Navbar Collapse Toggle Items-->
+              <div class="collapse navbar-collapse" id="navbarSupportedContent"><!--The Navbar non-dropdown list items-->
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#" aria-current="page">Home</a>
+                </li>
+              </ul>
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="#" aria-current="page">Services</a>
+                </li>
+              </ul>
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="#" aria-current="page">Store Locations</a>
+                </li>
+              </ul>
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#" aria-current="page">Steve's Workbench</a>
+                </li>
+              </ul>
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#" aria-current="page">About Us</a>
+                </li>
+              </ul>
+<!--Navbar Searchbox-->
+                <ul>
+              <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
+                </ul>
+              </div>
+            </div>
+          </nav>
+<!--The first row and 2nd column of this row which stores the Carousel-->
+          <div class="container-fluid" style="position:relative;">
+            <div class="row">
+<!--Column One: Spacer-->
+
+<!--Column Two: Carousel-->
+              <!--Carousel Slides-->
+            <div class="col">
+              <div id="carouselExampleControls" class="carousel" style="width:80%;" data-bs-ride="carousel">
+                  <div class="carousel-inner c_item" style="position:relative; overflow:hidden;">
+                      <div class="carousel-item active c_item">
+                        <img src="images/radio_shelf.jpg" style="position:relative;width:80%; margin-left:20%;" alt="" class="c_image">
+                      </div>
+                      <!--Carousel Slide No. 1 adjust w- -->
+                      </div>
+                      <div class="carousel-item c_item">
+                        <img src="images/light_bulbs.jpg" style="position:relative;width:80%;margin-left:20%;" class="c_image" alt="">
+                      </div>
+                      <!--Carousel Slide No. 2 adjust w- -->
+                      <div class="carousel-item c_item">
+                        <img src="images/radio_deck.jpg" style="position:relative;width:80%;margin-left:20%;" alt="" class="c_image">
+                      </div>
+                      <!--Carousel Slide No. 3 adjust w- -->
+                      </div>
+                  </div>
+              <!--Carousel Buttons-->
+              <!--Previous-->
+              <button class="carousel-control-prev" style="top:10%;position:absolute; transform:translate(100%)" type="button" data-bs-slide="prev" data-bs-target="#carouselExampleControls">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <!--Next-->
+              <button class="carousel-control-next" style="position:absolute;top:10%; transform:translate(-120%)" type="button" data-bs-slide="next" data-bs-target="#carouselExampleControls">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+              </div>
+
+
+
+<!--Column Three: Spacer-->
+
+            </div>
+            </div>
+          </div>
+<!--First, create a row where we are going to store the first column, which will be the navbar.-->
+
+
+
+<!--Second, create the second row where we are going to store the carousel-->
+
+
+<!--Third, create the third row where we are going to store the break_bar-->
+
+
+
+<!--Fourth, create the fourth row where we are going to create the card bar-->
+
+
+
+<!--Fifth, create the fifth row where we are to going to create the footer bar-->
+
+
+
+
+<div class="row spacer">
+<div class="col">
+</div>
+</div>
+
+
+<div class="row" style="position:relative;">
+
+<div class="container-fluid" style="position:relative;"> <!--Our first fluid container, meaning width = 100% always-->
+
+<p class="lead text-center"></p>
+
+</div>
+
+<div class="container-fluid" style="position:relative;"> <!--Our second fluid container, meaning width = 100% always-->
+
+    <div class="row text-center align-items-center" style="position:relative; height:120vh"> <!--Our first row within this 2nd container-->
+
+        <!--Our first column within this 1st row-->
+        <div class="col">
+            <div class="card shadow p-3 mg-5 bg-white rounded">
+                <div class="card-inner">
+                    <div class="card-body">
+                        <div class="card-title">Standard Service
+                        </div>
+                        <img class="card-img-top card_images_large rounded-circle" src="images/wires.jpg" alt="">
+                        <button class="btn btn-primary w-100 gob">Hello</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Our second column within this 1st row-->
+        <div class="col">
+            <div class="card shadow p-3 mg-5 bg-white rounded">
+                <div class="card-inner">
+                    <div class="card-body">
+                        <div class="card-title">Custom Service
+                        </div>
+                        <img class="card-img-top card_images_large rounded-circle" src="images/car.jpg" alt="">
+                        <button class="btn btn-primary w-100 gob">Hello</button>
+                    </div>
+                </div>
+           </div>
+        </div>
+
+
+
+
+
+
+
+
+        <!--Our third row within this 2nd container-->
+        <div class="col">
+            <div class="card shadow p-3 mg-5 bg-white rounded">
+                <div class="card-inner">
+                    <div class="card-body">
+                        <div class="card-title border-primary">Deluxe Revamp
+                        </div>
+                        <img class="card-img-top card_images_large rounded-circle" src="images/diner.jpg" alt="">
+                        <button class="btn btn-primary w-100 gob">Hello</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
+</div>
+
+<div class="row end bg-secondary">
+  <div class="col">
+  </div>
+  </div>
+
+
+
+
+<script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js "></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+.spacer {
+    height:20vh;
+    margin-top:0vh;
+    background-color:rgb(255, 253, 208);
+}
+
+.end {
+    height:20vh;
+    margin-top:0vh;
+}
+
+
+.card_images_large {
+   transform:scale(0.6);
+   top:25%;
+
+}
+
+.title_font {
+    height:20vh;
+    font-size:5vh;
+}
+
+
+.gob {
+    height:20vh;
+    font-size:5vh;
+}
