@@ -33,15 +33,15 @@ Problems </br></br>
         _Python CSV Library_ </br></br>
 
 **Week 7: SQL** </br></br>
-Problems </br></br>
+Problems </br>
   1) Favorites </br>
   2) Hall of Prophecy </br>
   3) Fiftyville </br>
 
 **Week 8: HTML, CSS, Javascript**</br></br>
-Problems </br></br>
+Problems </br>
   1) Homepage </br>
 
 **Week 9: Flask** </br></br>
-Problems </br></br>
+Problems </br>
   1) Finance </br>
