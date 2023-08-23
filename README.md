@@ -20,7 +20,7 @@ https://cs50.harvard.edu/x/2023/weeks/1/
  Problems </br></br>
     1) Trie </br>
     2) Inheritance </br>
-    3) Speller </br>
+    3) List </br>
 
 **Week 6: Python** </br> </br>
 Problems </br></br>
@@ -38,7 +38,7 @@ Problems </br>
 
 **Week 8: HTML, CSS, Javascript**</br></br>
 Problems </br>
-  1) Homepage </br>
+  1) Homepage (for local company Golden Dish) </br>
 
 **Week 9: Flask** </br></br>
 Problems </br>
