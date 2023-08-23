@@ -1,0 +1,86 @@
+/*
+fonts
+
+Bungee Shade https://fonts.google.com/specimen/Bungee+Shade?preview.text=Golden%20Dish&preview.text_type=custom
+
+Bagel Fat https://fonts.google.com/specimen/Bagel+Fat+One?preview.text=Golden%20Dish&preview.text_type=custom
+
+Oi https://fonts.google.com/specimen/Oi?preview.text=Golden%20Dish&preview.text_type=custom
+
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Oi&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Oi&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Bungee+Shade&family=Oi&display=swap');
+
+.body {
+    background-color: rgb(245, 241, 193);
+}
+
+
+.banner {
+    font-family:'Bagel Fat One',cursive;
+    background-color:red;
+    margin-left:"25px";
+}
+
+.brand-font{
+    color:rgb(255,215,0);
+    font-size:7vh;
+}
+
+
+.nav-font{
+    color:rgb(255,215,0);
+    margin-left:5vw;
+    white-space:nowrap;
+    font-size:2vh;
+}
+
+.nav-font:hover, .brand-font:hover{
+    color:white;
+}
+
+.logo {
+    height:100%;
+    width:10%;
+}
+
+.phone_link:hover{
+    color:green;
+}
+
+.phone_link {
+    white-space:wrap;
+}
+
+.main_image {
+    width:100%;
+
+}
+
+.bg-cream {
+    background-color:rgb(254,251,234);
+}
+
+.body_bg_cream {
+    height:20vh;
+    background-color:rgb(245, 241, 193);
+    text-align:center;
+
+}
+
+.red_buffer {
+    background-color:rgb(191, 48, 67);
+    height:15vh;
+}
+
+th {
+    font-size:5vh;
+}
+
+tr {
+    font-size:3vh;
+}
