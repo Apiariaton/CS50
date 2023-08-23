@@ -24,11 +24,13 @@ Week 5: Data Structures
 
 Week 6: Python
   Problems
-    1) Jar
-    2) Seven Day Average
-    3) Credit
-    4) Readability
-    5) DNA
+    1) Jar (titled cookies.py - created own programs using OO principles - hive.py, stocks.py)
+        _Object Oriented Programming with Python_
+    2) Bank
+    3) Credit (folder titled sentimental-credit)
+    4) Readability (folder titled sentimental-readability)
+    5) Seven Day Average
+        _Python CSV Library_
 
 Week 7: SQL
   Problems
