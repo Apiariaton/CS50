@@ -34,9 +34,7 @@ Problems </br></br>
 
 **Week 7: SQL** </br></br>
 Problems </br>
-  1) Favorites </br>
-  2) Hall of Prophecy </br>
-  3) Fiftyville </br>
+  1) Hall of Prophecy (also created my own relational database, under the mushrooms folder)</br>
 
 **Week 8: HTML, CSS, Javascript**</br></br>
 Problems </br>
