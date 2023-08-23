@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+<div class="text-success"> {{message}} <br> <br> </div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th> Stock Name </th>
+            <th> Stock Quantity Change </th>
+            <th> Cumulative Stock Quantity</th>
+            <th> Transaction Number </th>
+            <th> Transaction Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in transaction_history_table %}
+        <tr>
+        <td>{{i['share_name']}}</td>
+        <td>{{i['share_quantity_change']}}</td>
+        <td>{{i['cumulative_stock_quantity']}}</td>
+        <td>{{i['transaction_number']}}</td>
+        <td>{{i['transaction_date']}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}
