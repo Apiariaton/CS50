@@ -9,39 +9,39 @@ Week 2: Arrays
 
 Week 3: Algorithms
   Problems
-    1) Tideman
+    1) Tideman </br>
     
 Week 4: Memory
   Problems 
-    1) Filter
-    2) Recover
+    1) Filter </br>
+    2) Recover </br>
 
 Week 5: Data Structures
   Problems
-    1) Trie
-    2) Inheritance
-    3) Speller
+    1) Trie </br>
+    2) Inheritance </br>
+    3) Speller </br>
 
 Week 6: Python
-  Problems
-    1) Jar (titled cookies.py - created own programs using OO principles - hive.py, stocks.py)
-        _Object Oriented Programming with Python_
-    2) Bank
-    3) Credit (folder titled sentimental-credit)
-    4) Readability (folder titled sentimental-readability)
-    5) Seven Day Average
-        _Python CSV Library_
+  Problems </br>
+    1) Jar (titled cookies.py - created own programs using OO principles - hive.py, stocks.py) </br>
+        _Object Oriented Programming with Python_ </br>
+    2) Bank </br>
+    3) Credit (folder titled sentimental-credit) </br>
+    4) Readability (folder titled sentimental-readability) </br>
+    5) Seven Day Average </br>
+        _Python CSV Library_ </br>
 
 Week 7: SQL
   Problems
-  1) Favorites
-  2) Hall of Prophecy
-  3) Fiftyville
+  1) Favorites </br>
+  2) Hall of Prophecy </br>
+  3) Fiftyville </br>
 
 Week 8: HTML, CSS, Javascript
   Problems
-  1) Homepage
+  1) Homepage </br>
 
 Week 9: Flask
   Problems
-  1) Finance
+  1) Finance </br>
