@@ -39,6 +39,7 @@ Problems </br>
 **Week 8: HTML, CSS, Javascript**</br></br>
 Problems </br>
   1) Homepage (for local company Golden Dish) </br>
+  2) Redo (a redesign of the Radioshack website using Bootstrap) </br>
 
 **Week 9: Flask** </br></br>
 Problems </br>
