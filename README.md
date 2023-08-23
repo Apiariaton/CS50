@@ -3,6 +3,8 @@
 These were the problems I solved during CS50's Introduction to Computer Science programme.
 https://cs50.harvard.edu/x/2023/weeks/1/
 
+The Drafts and Explorations folder contains those files which I wrote to engage with a particular concept, and as such, are messer, more rough drafts.
+
 **Week 1: C**
  
 **Week 2: Arrays**
